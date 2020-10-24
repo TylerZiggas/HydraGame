@@ -3,14 +3,21 @@ package edu.umsl;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/*
+This project was created by Tyler Ziggas
+    The objective of this project is to defeat the Hydra with the limited amount of
+moves you have at your disposal and figure out how best to fight him.  Simply pick the option you want
+from the menu and continue.
+ */
+
 public class hydragame {
 
     public static void menuSelect() { // Menu select for moves, information, and giving up
         System.out.println("Knight PyPy, what move shall you use to attack the terrifying Hydra?");
         System.out.println("1) Cut off exactly ONE of the Hydra's Heads");
         System.out.println("2) Cut off exactly ONE of the Hydra's Tails");
-        System.out.println("3) Cut off exactly TWO of the Hydra's Tails");
-        System.out.println("4) Cut off exactly TWO of the Hydra's Heads");
+        System.out.println("3) Cut off exactly TWO of the Hydra's Heads");
+        System.out.println("4) Cut off exactly TWO of the Hydra's Tails");
         System.out.println("5) View current Tail and Head count");
         System.out.println("6) See minimum number of attacks to win");
         System.out.println("7) View this menu again");

@@ -2,7 +2,7 @@ package edu.umsl;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 import lombok.Getter;
-import lombok. Setter;
+import lombok.Setter;
 
 public class hydra extends hydragame {
     @Getter
@@ -48,21 +48,20 @@ public class hydra extends hydragame {
         int minHeads = numOfHeads;
 
         do {
-            if (minTails > 1) {
+            if (minHeads % 2 == 1 && minTails == 0) { // If there is 1 head left you can't win, return -1 to show that
+                minimumMoves = -1;
+                break;
+            }
+            if (minHeads % 2 == 0 && minHeads > 0) { // Use the fourth move
+                minHeads = minHeads - 2;
+                minimumMoves++;
+            } else if (minHeads == 0 && minTails < 4) { // Use the second move
+                minTails++;
+                minimumMoves++;
+            } else { // Use the third move
                 minTails = minTails - 2;
                 minHeads++;
                 minimumMoves++;
-            } else if (minTails == 1) {
-                minTails++;
-                minimumMoves++;
-            }
-            if (minHeads > 1) {
-                minHeads = minHeads - 2;
-                minimumMoves++;
-            }
-            if (minHeads == 1 && minTails == 0) { // If there is 1 head left you can't win, return -1 to show that
-                minimumMoves = -1;
-                break;
             }
         } while (minHeads != 0 || minTails != 0);
         return minimumMoves;
@@ -83,17 +82,17 @@ public class hydra extends hydragame {
                 }
                 break;
             case 3:
-                if (numOfTails < 2) { // Make sure there are enough Tails
-                    System.out.println("You tried to swing at two of the Hydra's tails, but it doesn't even have two!");
-                    return false;
-                }
-                break;
-            case 4:
                 if (numOfHeads < 2) { // Make sure there are enough Heads
                     System.out.println("You tried to swing at two of the Hydra's heads, but it doesn't even have two!");
                     return false;
                 }
                 break;
+            case 4:
+                if (numOfTails < 2) { // Make sure there are enough Tails
+                    System.out.println("You tried to swing at two of the Hydra's tails, but it doesn't even have two!");
+                    return false;
+                }
+            break;
             default:
                 System.out.println("What should I use against this monster?"); // Just in case the user gets here there is text
                 break;
@@ -108,12 +107,12 @@ public class hydra extends hydragame {
             numOfTails++;
             System.out.println("You have cut off a Hydra tail, but two new tails grew in its place!");
         } else if (attackNumber == 3) { // Cutting off 2 tails makes 1 head grow
+            numOfHeads = numOfHeads - 2;
+            System.out.println("You have cut off exactly two of the Hydra's heads!");
+        } else if (attackNumber == 4) { // Cutting off 2 heads is optimal and subtracts 2 heads without adding anything
             numOfTails = numOfTails - 2;
             numOfHeads++;
             System.out.println("You have cut off exactly two of the Hydra's tails, but a new head grew in their place!");
-        } else if (attackNumber == 4) { // Cutting off 2 heads is optimal and subtracts 2 heads without adding anything
-            numOfHeads= numOfHeads - 2;
-            System.out.println("You have cut off exactly two of the Hydra's heads!");
         } else {
             System.out.println("How should I attack this creature?"); // Another backup scenario incase the user gets here
         }
